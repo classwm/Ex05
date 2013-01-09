@@ -7,7 +7,7 @@ public class DLCList<T> {
      * wartownika
      */
     public DLCList() {
-        head = new Node<>(null, null, null);
+        sentinel = new Node<>(null, null, null);
     } // DLCList() konstruktor
 
     /**
@@ -23,20 +23,20 @@ public class DLCList<T> {
     }
 
     /**
-     * Wstawia element (danego typu) na początek listy (za wartownikiem)
+     * Wstawia element (danego typu) na początek listy (po wartowniku)
      *
      * @param key
      */
     public void insert(T key) {
 
-        if (head.getNext() == null) {
-            Node<T> target = new Node<>(key, head, head);
-            head.setNext(target);
-            head.setPrev(target);
+        if (sentinel.getNext() == null) {
+            Node<T> target = new Node<>(key, sentinel, sentinel);
+            sentinel.setNext(target);
+            sentinel.setPrev(target);
         } else {
-            Node<T> target = new Node<>(key, head, head.getNext());
-            (head.getNext()).setPrev(target);
-            head.setNext(target);
+            Node<T> target = new Node<>(key, sentinel, sentinel.getNext());
+            (sentinel.getNext()).setPrev(target);
+            sentinel.setNext(target);
         }
     } // insert
 
@@ -47,17 +47,17 @@ public class DLCList<T> {
      */
     public void delete(T key) {
 
-        Node<T> nodeCurr = head.getNext();
+        Node<T> nodeCurr = sentinel.getNext();
         Node<T> nodeNext = nodeCurr.getNext();
 
-        if (nodeCurr.getValue() == key && nodeNext != head) {
-            head.setNext(nodeNext);
-            nodeNext.setPrev(head);
-        } else if (nodeCurr.getValue() == key && nodeNext == head) {
-            head.setNext(null);
-            head.setPrev(null);
+        if (nodeCurr.getValue() == key && nodeNext != sentinel) {
+            sentinel.setNext(nodeNext);
+            nodeNext.setPrev(sentinel);
+        } else if (nodeCurr.getValue() == key && nodeNext == sentinel) {
+            sentinel.setNext(null);
+            sentinel.setPrev(null);
         } else {
-            while (nodeCurr != head) {
+            while (nodeCurr != sentinel) {
                 if (nodeNext.getValue() == key) {
                     nodeCurr.setNext(nodeNext.getNext());
                     (nodeNext.getNext()).setPrev(nodeCurr);
@@ -70,17 +70,22 @@ public class DLCList<T> {
     }
 
     /**
-     * Wyszukuje na liście element o podanej wartości; zwraca true jeśli element
-     * wystepuje, false jesli nie występuje
+     * Wyszukuje na liście element o podanej wartości; zwraca element jeśli
+     * wystepuje, null jesli nie występuje
      *
      * @param key
      */
-    public boolean search(T key) {
+    public Node<T> search(T key) {
 
-
-        return true;
-
-    }
+        Node<T> node = sentinel.getNext();
+        while (node != sentinel) {
+            if (key.equals(node.getValue())) {
+                return (node);
+            }
+            node = node.getNext();
+        }
+        return null;
+    } // search
 
     /**
      * Trawersuje listę i wyświetla jej elementy bez wartownika
@@ -88,8 +93,8 @@ public class DLCList<T> {
     public void display() {
 
         System.out.print("Lista:");
-        Node<T> node = head.getNext();
-        while (node != head) {
+        Node<T> node = sentinel.getNext();
+        while (node != sentinel) {
             System.out.print(" " + node.getValue());
             node = node.getNext();
         }
@@ -102,25 +107,25 @@ public class DLCList<T> {
      */
     public void displayAll() {
 
-        Node<T> node = head.getNext();
+        Node<T> node = sentinel.getNext();
         if (node == null) {
             System.out.println("Lista jest pusta.");
             nodeFrame();
-            System.out.println("| Prev: " + head.getPrev());
+            System.out.println("| Prev: " + sentinel.getPrev());
             nodeFrame();
-            System.out.println("| HEAD: " + head.getValue());
+            System.out.println("| SENTINEL: " + sentinel.getValue());
             nodeFrame();
-            System.out.println("| Next: " + head.getNext());
+            System.out.println("| Next: " + sentinel.getNext());
             nodeFrame();
         } else {
             nodeFrame();
-            System.out.println("| Prev: " + (head.getPrev()).getValue());
+            System.out.println("| Prev: " + (sentinel.getPrev()).getValue());
             nodeFrame();
-            System.out.println("| HEAD: " + head.getValue());
+            System.out.println("| SENTINEL: " + sentinel.getValue());
             nodeFrame();
-            System.out.println("| Next: " + (head.getNext()).getValue());
+            System.out.println("| Next: " + (sentinel.getNext()).getValue());
             nodeFrame();
-            while (node != head) {
+            while (node != sentinel) {
                 System.out.println("");
                 nodeFrame();
                 System.out.println("| Prev: " + (node.getPrev()).getValue());
@@ -144,5 +149,5 @@ public class DLCList<T> {
     /**
      * Wartownik listy
      */
-    private Node<T> head;
+    private Node<T> sentinel;
 } // DLCList
