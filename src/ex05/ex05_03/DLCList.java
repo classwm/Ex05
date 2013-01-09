@@ -13,14 +13,14 @@ public class DLCList<T> {
     /**
      * Konstruktor listy z tablicy elementów z zachowaniem kolejności
      *
-     * @param keys
+     * @param values
      */
-    public DLCList(T[] keys) {
+    public DLCList(T[] values) {
         this();
-        for (int i = keys.length - 1; i >= 0; i--) {
-            insert(keys[i]);
+        for (int i = values.length - 1; i >= 0; i--) {
+            insert(values[i]);
         }
-    }
+    } //DLCList(T[])
 
     /**
      * Wstawia element (danego typu) na początek listy (po wartowniku)
