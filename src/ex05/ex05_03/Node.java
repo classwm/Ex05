@@ -20,8 +20,8 @@ public class Node<T> {
         return next;
     }    
     
-    public void setValue(T data) {
-        this.value = data;
+    public void setValue(T value) {
+        this.value = value;
     }
 
     public void setPrev(Node<T> prev) {

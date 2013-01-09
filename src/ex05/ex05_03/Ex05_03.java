@@ -23,14 +23,15 @@ public class Ex05_03 {
         System.out.println("Element 'dwa'" + (list01.search("dwa") != null ? "" : " nie") + " występuje na liście.");
         System.out.println("Element '-32'" + (list01.search(-32) != null ? "" : " nie") + " występuje na liście.");
         System.out.println("Element 'ABC'" + (list01.search("ABC") != null ? "" : " nie") + " występuje na liście.");
-        
+
         separator("=", "Kasowanie elemenów", 16);
+
         list01.display();
         for (Integer number : numbers) {
             list01.delete(number);
         }
         list01.display();
-        
+
         System.out.println("");
         separator("=", "Lista wraz z wartownikiem i wartościami pól elementów", 6);
         list01.displayAll();
@@ -50,11 +51,6 @@ public class Ex05_03 {
         separator("=", "Kasowanie cztery", 16);
         list01.delete("cztery");
         list01.displayAll();
-
-
-
-
-
     }
 
     /**
