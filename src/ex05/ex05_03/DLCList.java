@@ -25,16 +25,16 @@ public class DLCList<T> {
     /**
      * Wstawia element (danego typu) na początek listy (po wartowniku)
      *
-     * @param key
+     * @param value
      */
-    public void insert(T key) {
+    public void insert(T value) {
 
         if (sentinel.getNext() == null) {
-            Node<T> target = new Node<>(key, sentinel, sentinel);
+            Node<T> target = new Node<>(value, sentinel, sentinel);
             sentinel.setNext(target);
             sentinel.setPrev(target);
         } else {
-            Node<T> target = new Node<>(key, sentinel, sentinel.getNext());
+            Node<T> target = new Node<>(value, sentinel, sentinel.getNext());
             (sentinel.getNext()).setPrev(target);
             sentinel.setNext(target);
         }
@@ -43,22 +43,22 @@ public class DLCList<T> {
     /**
      * Kasuje z listy podany element
      *
-     * @param key
+     * @param value
      */
-    public void delete(T key) {
+    public void delete(T value) {
 
         Node<T> nodeCurr = sentinel.getNext();
         Node<T> nodeNext = nodeCurr.getNext();
 
-        if (nodeCurr.getValue() == key && nodeNext != sentinel) {
+        if (nodeCurr.getValue() == value && nodeNext != sentinel) {
             sentinel.setNext(nodeNext);
             nodeNext.setPrev(sentinel);
-        } else if (nodeCurr.getValue() == key && nodeNext == sentinel) {
+        } else if (nodeCurr.getValue() == value && nodeNext == sentinel) {
             sentinel.setNext(null);
             sentinel.setPrev(null);
         } else {
             while (nodeCurr != sentinel) {
-                if (nodeNext.getValue() == key) {
+                if (nodeNext.getValue() == value) {
                     nodeCurr.setNext(nodeNext.getNext());
                     (nodeNext.getNext()).setPrev(nodeCurr);
                     return;
@@ -73,13 +73,13 @@ public class DLCList<T> {
      * Wyszukuje na liście element o podanej wartości; zwraca element jeśli
      * wystepuje, null jesli nie występuje
      *
-     * @param key
+     * @param value
      */
-    public Node<T> search(T key) {
+    public Node<T> search(T value) {
 
         Node<T> node = sentinel.getNext();
         while (node != sentinel) {
-            if (key.equals(node.getValue())) {
+            if (value.equals(node.getValue())) {
                 return (node);
             }
             node = node.getNext();
