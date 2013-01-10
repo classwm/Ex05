@@ -108,6 +108,8 @@ public class BinarySearchTree<T extends Comparable<T>> {
         }
         treeInt.displayAsList();
         System.out.println("Root drzewa: " + treeInt.root.getKey());
+        System.out.println("Klucz/wartość 24" + (treeInt.search(24) != null ? "" : " nie") + " znajduje się w drzewie.");
+        System.out.println("Klucz/wartość 300" + (treeInt.search(300) != null ? "" : " nie") + " znajduje się w drzewie.");
 
         for (String letter : letters) {
             treeStr.insert(letter);
@@ -115,6 +117,8 @@ public class BinarySearchTree<T extends Comparable<T>> {
         treeStr.displayAsList();
         System.out.println("     Root drzewa: " + treeStr.root.getKey());
         System.out.println("Lewe: " + treeStr.root.getLeftChild().getKey() + "       Prawe: " + treeStr.root.getRightChild().getKey());
+        System.out.println("Klucz/wartość 'R'" + (treeStr.search("R") != null ? "" : " nie") + " znajduje się w drzewie.");
+        System.out.println("Klucz/wartość 'Y'" + (treeStr.search("Y") != null ? "" : " nie") + " znajduje się w drzewie.");
 
 
     }
