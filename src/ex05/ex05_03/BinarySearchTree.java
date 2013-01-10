@@ -4,7 +4,7 @@ public class BinarySearchTree<T extends Comparable<T>> {
 
     /**
      * Klasa węzła drzewa wyszukiwania binarnego, dla uproszczenia implementacji
-     * przyjmuje się, że klucz jest równoważny z wartością węzła
+     * zakładam, że klucz jest równoważny z wartością węzła
      */
     private class BSTNode {
 
@@ -148,7 +148,7 @@ public class BinarySearchTree<T extends Comparable<T>> {
     /**
      * Usuwanie z drzewa węzła o podanym kluczu/wartości
      *
-     * @param key
+     * @param key klucz/wartość węzła do usunięcia
      */
     public void delete(T key) {
         root = delete(root, key);
@@ -179,7 +179,7 @@ public class BinarySearchTree<T extends Comparable<T>> {
     } // delete(T key)  
 
     /**
-     * Wywołanie wyświetlenie listy węzłów drzewa
+     * Wywołanie trawersu i wyświetlenia listy węzłów drzewa
      */
     public void displayNodes() {
         displayNodes(root);
