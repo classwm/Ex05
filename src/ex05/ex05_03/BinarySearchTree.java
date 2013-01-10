@@ -78,6 +78,58 @@ public class BinarySearchTree<T extends Comparable<T>> {
         }
     }
 
+    public T minimum() {
+        return minimum(root).getKey();
+    }
+
+    private BSTNode minimum(BSTNode root) {
+        if (root.getLeftChild() == null) {
+            return root;
+        }
+        return minimum(root.getLeftChild());
+    }
+
+    public void deleteMinimal() {
+
+        root = deleteMinimal(root);
+    }
+
+    private BSTNode deleteMinimal(BSTNode root) {
+        if (root.getLeftChild() == null) {
+            return root.getRightChild();
+        }
+        root.setLeftChild(deleteMinimal(root.getLeftChild()));
+        return root;
+    }
+
+    public void delete(T key) {
+        root = delete(root, key);
+    }
+
+    private BSTNode delete(BSTNode root, T key) {
+        if (root == null) {
+            return null;
+        }
+        int deleteCompare = key.compareTo(root.getKey());
+        if (deleteCompare < 0) {
+            root.setLeftChild(delete(root.getLeftChild(), key));
+        } else if (deleteCompare > 0) {
+            root.setRightChild(delete(root.getRightChild(), key));
+        } else {
+            if (root.getRightChild() == null) {
+                return root.getLeftChild();
+            }
+            if (root.getLeftChild() == null) {
+                return root.getRightChild();
+            }
+            BSTNode tmp = root;
+            root = minimum(tmp.getRightChild());
+            root.setRightChild(deleteMinimal(tmp.getRightChild()));
+            root.setLeftChild(tmp.getLeftChild());
+        }
+        return root;
+    }
+
     public void displayAsList() {
         List<T> list = new ArrayList<>();
         traversal(root, list);
@@ -89,10 +141,24 @@ public class BinarySearchTree<T extends Comparable<T>> {
 
     private void traversal(BSTNode node, List<T> list) {
         if (node != null) {
-            traversal(node.leftChild, list);
+            traversal(node.getLeftChild(), list);
             list.add(node.getKey());
-            traversal(node.rightChild, list);
+            traversal(node.getRightChild(), list);
         }
+    }
+
+    public void displayAsTree() {
+        BSTNode node = root;
+        if (node != null) {
+            System.out.println(node.getKey());
+        }
+
+        while (node != null) {
+            System.out.println(node.getKey());
+        }
+
+
+
     }
 
     public static void main(String[] args) {
@@ -100,7 +166,7 @@ public class BinarySearchTree<T extends Comparable<T>> {
         BinarySearchTree<Integer> treeInt = new BinarySearchTree<>();
         BinarySearchTree<String> treeStr = new BinarySearchTree<>();
 
-        Integer[] numbers = {50, 1, 2, 3, 24, 4, 5, 6, 7, -30, 60, 134, 50, 500, -148};
+        Integer[] numbers = {50, 1, 2, 3, 24, 4, 5, 6, 7, -30, 60, 134, 50, 500, -148, 60};
         String[] letters = {"H", "C", "S", "A", "E", "R", "X"};
 
         for (Integer number : numbers) {
