@@ -1,8 +1,5 @@
 package ex05.ex05_03;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
 
 public class BinarySearchTree<T extends Comparable<T>> {
 
@@ -77,7 +74,7 @@ public class BinarySearchTree<T extends Comparable<T>> {
             root.setKey(key);
         }
         return root;
-    }
+    } // insert
 
     /**
      * Wyszukiwanie węzła o podanym kluczu/wartości, w przypadku znalezienia
@@ -109,7 +106,7 @@ public class BinarySearchTree<T extends Comparable<T>> {
         } else {
             return root.getKey();
         }
-    }
+    } //search
 
     /**
      * Zwraca najmniejszy klucz/wartość drzewa
@@ -131,7 +128,7 @@ public class BinarySearchTree<T extends Comparable<T>> {
             return root;
         }
         return minimum(root.getLeftChild());
-    }
+    } // minimum
 
     /**
      * Usuwanie najmniejszego klucza/wartości z drzewa, używane przy usuwaniu
@@ -147,7 +144,7 @@ public class BinarySearchTree<T extends Comparable<T>> {
         }
         root.setLeftChild(deleteMinimal(root.getLeftChild()));
         return root;
-    }
+    } // deleteMinimal
 
     /**
      * Usuwanie z drzewa węzła o podanym kluczu/wartości
@@ -180,47 +177,28 @@ public class BinarySearchTree<T extends Comparable<T>> {
             root.setLeftChild(tmp.getLeftChild());
         }
         return root;
-    }
+    } // delete(T key)  
 
     /**
-     * Wyświetla węzły drzewa w pistaci listy kluczy/wartości
+     * Wywołanie wyświetlenie listy węzłów drzewa
      */
-    public void displayAsList() {
-        List<T> list = new ArrayList<>();
-        traversal(root, list);
-        for (Iterator<T> it = list.iterator(); it.hasNext();) {
-            T node = it.next();
-            System.out.println(node);
-        }
+    public void displayNodes() {
+        displayNodes(root);
     }
-
+    
     /**
-     * Trawersal po strukturze drzewa, tworzy listę węzłów
-     *
-     * @param node węzeł początkowy
-     * @param list tworzona lista węzłów
+     * Trawersal po strukturze drzewa, wyświetla listę węzłów
+     * @param node węzeł początkowy trawersu
      */
-    private void traversal(BSTNode node, List<T> list) {
-        if (node != null) {
-            traversal(node.getLeftChild(), list);
-            list.add(node.getKey());
-            traversal(node.getRightChild(), list);
+    private void displayNodes(BSTNode node) {
+        if (node.getLeftChild() != null) {
+            displayNodes(node.getLeftChild());
         }
-    }
-
-    public void displayAsTree() {
-        BSTNode node = root;
-        if (node != null) {
-            System.out.println(node.getKey());
+        System.out.println(node.getKey() + " ");
+        if (node.getRightChild() != null) {
+            displayNodes(node.getRightChild());
         }
-
-        while (node != null) {
-            System.out.println(node.getKey());
-        }
-
-
-
-    }
+    } // displayNodes
 
     public static void main(String[] args) {
 
@@ -234,21 +212,21 @@ public class BinarySearchTree<T extends Comparable<T>> {
             treeInt.insert(number);
         }
         separator("=", "Drzewo Integerów dodanych z tablicy", 12);
-        treeInt.displayAsList();
+        treeInt.displayNodes();
         System.out.println("Root drzewa: " + treeInt.root.getKey());
         separator("-", "Test szukania kluczy/wartości", 12);
         System.out.println("Klucz/wartość 24" + (treeInt.search(24) != null ? "" : " nie") + " znajduje się w drzewie.");
         System.out.println("Klucz/wartość 300" + (treeInt.search(300) != null ? "" : " nie") + " znajduje się w drzewie.");
         separator("-", "Test usuwania kluczy/wartości", 12);
         treeInt.delete(24);
-        treeInt.displayAsList();
+        treeInt.displayNodes();
         System.out.println("Klucz/wartość 24" + (treeInt.search(24) != null ? "" : " nie") + " znajduje się w drzewie.");
 
         separator("=", "Drzewo Stringów dodanych z tablicy", 12);
         for (String letter : letters) {
             treeStr.insert(letter);
         }
-        treeStr.displayAsList();
+        treeStr.displayNodes();
         System.out.println("    Root:  " + treeStr.root.getKey());
         System.out.println("Lewe: " + treeStr.root.getLeftChild().getKey() + "       Prawe: " + treeStr.root.getRightChild().getKey());
         separator("-", "Test szukania kluczy/wartości", 12);
@@ -256,11 +234,11 @@ public class BinarySearchTree<T extends Comparable<T>> {
         System.out.println("Klucz/wartość 'Y'" + (treeStr.search("Y") != null ? "" : " nie") + " znajduje się w drzewie.");
         separator("-", "Test usuwania kluczy/wartości", 12);
         treeStr.delete("H");
-        treeStr.displayAsList();
+        treeStr.displayNodes();
         System.out.println("    Root:  " + treeStr.root.getKey());
         System.out.println("Lewe: " + treeStr.root.getLeftChild().getKey() + "       Prawe: " + treeStr.root.getRightChild().getKey());
         System.out.println("Klucz/wartość 'H'" + (treeStr.search("H") != null ? "" : " nie") + " znajduje się w drzewie.");
-
+        
     }
 
     /**
