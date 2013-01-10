@@ -196,6 +196,7 @@ public class BinarySearchTree<T extends Comparable<T>> {
 
     /**
      * Trawersal po strukturze drzewa, tworzy listę węzłów
+     *
      * @param node węzeł początkowy
      * @param list tworzona lista węzłów
      */
@@ -232,29 +233,49 @@ public class BinarySearchTree<T extends Comparable<T>> {
         for (Integer number : numbers) {
             treeInt.insert(number);
         }
+        separator("=", "Drzewo Integerów dodanych z tablicy", 12);
         treeInt.displayAsList();
         System.out.println("Root drzewa: " + treeInt.root.getKey());
+        separator("-", "Test szukania kluczy/wartości", 12);
         System.out.println("Klucz/wartość 24" + (treeInt.search(24) != null ? "" : " nie") + " znajduje się w drzewie.");
         System.out.println("Klucz/wartość 300" + (treeInt.search(300) != null ? "" : " nie") + " znajduje się w drzewie.");
+        separator("-", "Test usuwania kluczy/wartości", 12);
+        treeInt.delete(24);
+        treeInt.displayAsList();
+        System.out.println("Klucz/wartość 24" + (treeInt.search(24) != null ? "" : " nie") + " znajduje się w drzewie.");
 
+        separator("=", "Drzewo Stringów dodanych z tablicy", 12);
         for (String letter : letters) {
             treeStr.insert(letter);
         }
         treeStr.displayAsList();
-        System.out.println("     Root: " + treeStr.root.getKey());
+        System.out.println("    Root:  " + treeStr.root.getKey());
         System.out.println("Lewe: " + treeStr.root.getLeftChild().getKey() + "       Prawe: " + treeStr.root.getRightChild().getKey());
+        separator("-", "Test szukania kluczy/wartości", 12);
         System.out.println("Klucz/wartość 'R'" + (treeStr.search("R") != null ? "" : " nie") + " znajduje się w drzewie.");
         System.out.println("Klucz/wartość 'Y'" + (treeStr.search("Y") != null ? "" : " nie") + " znajduje się w drzewie.");
-        treeStr.delete("R");
-        treeStr.displayAsList();
-        System.out.println("     Roota: " + treeStr.root.getKey());
-        System.out.println("Lewe: " + treeStr.root.getLeftChild().getKey() + "       Prawe: " + treeStr.root.getRightChild().getKey());
-
-        System.out.println("Klucz/wartość 'R'" + (treeStr.search("R") != null ? "" : " nie") + " znajduje się w drzewie.");
+        separator("-", "Test usuwania kluczy/wartości", 12);
         treeStr.delete("H");
         treeStr.displayAsList();
-        System.out.println("     Roota: " + treeStr.root.getKey());
+        System.out.println("    Root:  " + treeStr.root.getKey());
         System.out.println("Lewe: " + treeStr.root.getLeftChild().getKey() + "       Prawe: " + treeStr.root.getRightChild().getKey());
+        System.out.println("Klucz/wartość 'H'" + (treeStr.search("H") != null ? "" : " nie") + " znajduje się w drzewie.");
 
+    }
+
+    /**
+     * Formatowanie wyjścia danych programu.
+     *
+     * @param sep Ciąg znaków separatora.
+     * @param info String z opisem następnego bloku wypisanych danych.
+     * @param i Ilośc powtórzen wyświetlenia separatora.
+     */
+    private static void separator(String sep, String info, int i) {
+        System.out.println("");
+        while (i > 0) {
+            System.out.print(sep);
+            i--;
+        }
+        System.out.println(" " + info + ":");
     }
 } // BinarySearchTree
