@@ -2,13 +2,10 @@
 package ex05.ex05_03;
 
 
-public class BSTNode<T extends Comparable<T>> {
+public class BSTNode<T> {
 
-    public BSTNode(T key, BSTNode leftChild, BSTNode rightChild, BSTNode parent) {
-        this.key = key;
-        this.leftChild = leftChild;
-        this.rightChild = rightChild;
-        this.parent = parent;
+    public BSTNode(T key) {
+        this.key = key;                
     }
 
     public T getKey() {
