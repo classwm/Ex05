@@ -6,6 +6,10 @@ import java.util.List;
 
 public class BinarySearchTree<T extends Comparable<T>> {
 
+    /**
+     * Klasa węzła drzewa wyszukiwania binarnego, dla uproszczenia implementacji
+     * przyjmuje się, że klucz jest równoważny z wartością węzła
+     */
     private class BSTNode {
 
         public BSTNode(T key) {
@@ -39,12 +43,27 @@ public class BinarySearchTree<T extends Comparable<T>> {
         private BSTNode leftChild;
         private BSTNode rightChild;
     } // BSTNode
+    /**
+     * Węzeł root (korzeń) drzewa
+     */
     private BSTNode root;
 
+    /**
+     * Dodanie do drzewa węzła na właściwą pozycję
+     *
+     * @param key klucz/wartość dodwanego węzła
+     */
     public void insert(T key) {
         root = insert(root, key);
     }
 
+    /**
+     * Zmiana wartości/klucza lub utworzenie nowego węzła w poddrzewie
+     *
+     * @param root korzeń poddrzewa
+     * @param key dodawany klucz/wartość
+     * @return
+     */
     private BSTNode insert(BSTNode root, T key) {
         if (root == null) {
             return new BSTNode(key);
@@ -60,10 +79,24 @@ public class BinarySearchTree<T extends Comparable<T>> {
         return root;
     }
 
+    /**
+     * Wyszukiwanie węzła o podanym kluczu/wartości, w przypadku znalezienia
+     * zwraca szukaną wartość, w innym przypadku zwraca null
+     *
+     * @param key szukany klucz/wartość
+     * @return klucz/wartość jeśli znalezione, null gdy brak
+     */
     public T search(T key) {
         return search(root, key);
     }
 
+    /**
+     * Wyszukiwanie klucza/wartości w poddrzewie z korzenia root
+     *
+     * @param root korzeń poddrzewa
+     * @param key szukany klucz/wartość
+     * @return
+     */
     private T search(BSTNode root, T key) {
         if (root == null) {
             return null;
@@ -78,10 +111,21 @@ public class BinarySearchTree<T extends Comparable<T>> {
         }
     }
 
+    /**
+     * Zwraca najmniejszy klucz/wartość drzewa
+     *
+     * @return
+     */
     public T minimum() {
         return minimum(root).getKey();
     }
 
+    /**
+     * Zwraca najmniejszą wartość poddrzewaz korzenia root
+     *
+     * @param root korzeń poddrzewa
+     * @return
+     */
     private BSTNode minimum(BSTNode root) {
         if (root.getLeftChild() == null) {
             return root;
@@ -89,8 +133,11 @@ public class BinarySearchTree<T extends Comparable<T>> {
         return minimum(root.getLeftChild());
     }
 
+    /**
+     * Usuwanie najmniejszego klucza/wartości z drzewa, używane przy usuwaniu
+     * węzła z drzewa
+     */
     public void deleteMinimal() {
-
         root = deleteMinimal(root);
     }
 
@@ -102,6 +149,11 @@ public class BinarySearchTree<T extends Comparable<T>> {
         return root;
     }
 
+    /**
+     * Usuwanie z drzewa węzła o podanym kluczu/wartości
+     *
+     * @param key
+     */
     public void delete(T key) {
         root = delete(root, key);
     }
@@ -130,6 +182,9 @@ public class BinarySearchTree<T extends Comparable<T>> {
         return root;
     }
 
+    /**
+     * Wyświetla węzły drzewa w pistaci listy kluczy/wartości
+     */
     public void displayAsList() {
         List<T> list = new ArrayList<>();
         traversal(root, list);
@@ -139,6 +194,11 @@ public class BinarySearchTree<T extends Comparable<T>> {
         }
     }
 
+    /**
+     * Trawersal po strukturze drzewa, tworzy listę węzłów
+     * @param node węzeł początkowy
+     * @param list tworzona lista węzłów
+     */
     private void traversal(BSTNode node, List<T> list) {
         if (node != null) {
             traversal(node.getLeftChild(), list);
@@ -181,11 +241,20 @@ public class BinarySearchTree<T extends Comparable<T>> {
             treeStr.insert(letter);
         }
         treeStr.displayAsList();
-        System.out.println("     Root drzewa: " + treeStr.root.getKey());
+        System.out.println("     Root: " + treeStr.root.getKey());
         System.out.println("Lewe: " + treeStr.root.getLeftChild().getKey() + "       Prawe: " + treeStr.root.getRightChild().getKey());
         System.out.println("Klucz/wartość 'R'" + (treeStr.search("R") != null ? "" : " nie") + " znajduje się w drzewie.");
         System.out.println("Klucz/wartość 'Y'" + (treeStr.search("Y") != null ? "" : " nie") + " znajduje się w drzewie.");
+        treeStr.delete("R");
+        treeStr.displayAsList();
+        System.out.println("     Roota: " + treeStr.root.getKey());
+        System.out.println("Lewe: " + treeStr.root.getLeftChild().getKey() + "       Prawe: " + treeStr.root.getRightChild().getKey());
 
+        System.out.println("Klucz/wartość 'R'" + (treeStr.search("R") != null ? "" : " nie") + " znajduje się w drzewie.");
+        treeStr.delete("H");
+        treeStr.displayAsList();
+        System.out.println("     Roota: " + treeStr.root.getKey());
+        System.out.println("Lewe: " + treeStr.root.getLeftChild().getKey() + "       Prawe: " + treeStr.root.getRightChild().getKey());
 
     }
 } // BinarySearchTree
