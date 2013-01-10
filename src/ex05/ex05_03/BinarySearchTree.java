@@ -1,6 +1,5 @@
 package ex05.ex05_03;
 
-
 public class BinarySearchTree<T extends Comparable<T>> {
 
     /**
@@ -185,9 +184,10 @@ public class BinarySearchTree<T extends Comparable<T>> {
     public void displayNodes() {
         displayNodes(root);
     }
-    
+
     /**
      * Trawersal po strukturze drzewa, wyświetla listę węzłów
+     *
      * @param node węzeł początkowy trawersu
      */
     private void displayNodes(BSTNode node) {
@@ -229,6 +229,7 @@ public class BinarySearchTree<T extends Comparable<T>> {
         treeStr.displayNodes();
         System.out.println("    Root:  " + treeStr.root.getKey());
         System.out.println("Lewe: " + treeStr.root.getLeftChild().getKey() + "       Prawe: " + treeStr.root.getRightChild().getKey());
+
         separator("-", "Test szukania kluczy/wartości", 12);
         System.out.println("Klucz/wartość 'R'" + (treeStr.search("R") != null ? "" : " nie") + " znajduje się w drzewie.");
         System.out.println("Klucz/wartość 'Y'" + (treeStr.search("Y") != null ? "" : " nie") + " znajduje się w drzewie.");
@@ -238,7 +239,6 @@ public class BinarySearchTree<T extends Comparable<T>> {
         System.out.println("    Root:  " + treeStr.root.getKey());
         System.out.println("Lewe: " + treeStr.root.getLeftChild().getKey() + "       Prawe: " + treeStr.root.getRightChild().getKey());
         System.out.println("Klucz/wartość 'H'" + (treeStr.search("H") != null ? "" : " nie") + " znajduje się w drzewie.");
-        
     }
 
     /**
